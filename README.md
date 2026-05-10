@@ -15,7 +15,7 @@ Interactive flowchart based on SFDA Guidance **MDS-G-028-V1 (2026)**.
 [LinkedIn Profile](https://www.linkedin.com/in/jamaluddin-bd-qa)
 
 ### Live Demo
-[View the Flowchart](https://yourusername.github.io/lindkein-sfda-flowchart/)
+[View the Flowchart](https://Jamal-20.github.io/SFDA-MDMA-bundling/)
 
 ### Last Updated
 May 2026
