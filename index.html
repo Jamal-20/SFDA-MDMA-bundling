@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SFDA MDMA Bundling Flowchart </title>
+    <title>SFDA MDMA Bundling Flowchart - Lindkein</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <!-- html2canvas for image export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -31,7 +33,7 @@
         .header {
             background: linear-gradient(135deg, #0b5e5e 0%, #063838 100%);
             color: white;
-            padding: 32px 40px;
+            padding: 24px 32px 16px 32px;
             text-align: center;
         }
 
@@ -39,17 +41,38 @@
             font-size: 28px;
             font-weight: 600;
             letter-spacing: 1px;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .header .subtitle {
-            font-size: 18px;
+            font-size: 16px;
             opacity: 0.9;
             font-weight: 400;
+            margin-bottom: 16px;
         }
 
-        .header .divider {
-            width: 80px;
+        .reference-top {
+            background: rgba(255, 255, 255, 0.15);
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        .reference-top a {
+            color: #ffd966;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .reference-top a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .divider {
+            width: 60px;
             height: 3px;
             background: #f9a825;
             margin: 16px auto 0 auto;
@@ -70,44 +93,72 @@
             padding: 20px;
             border-radius: 16px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            min-width: 900px;
+            min-width: 1000px;
+        }
+
+        /* Button bar */
+        .button-bar {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            padding: 20px 24px;
+            background: #f0f4f3;
+            border-bottom: 1px solid #d0dad8;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            font-family: inherit;
+        }
+
+        .btn-linkedin {
+            background: #0077b5;
+            color: white;
+        }
+
+        .btn-linkedin:hover {
+            background: #005e8c;
+            transform: scale(1.02);
+        }
+
+        .btn-pdf {
+            background: #d32f2f;
+            color: white;
+        }
+
+        .btn-pdf:hover {
+            background: #b71c1c;
+            transform: scale(1.02);
+        }
+
+        .btn-image {
+            background: #0b5e5e;
+            color: white;
+        }
+
+        .btn-image:hover {
+            background: #084848;
+            transform: scale(1.02);
         }
 
         .footer {
             background: #f0f4f3;
-            padding: 24px 40px;
+            padding: 20px 40px;
             text-align: center;
             border-top: 1px solid #d0dad8;
-        }
-
-        .reference {
-            font-size: 13px;
-            color: #1a5a5a;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 1px dashed #c0cecc;
-            display: inline-block;
-        }
-
-        .reference a {
-            color: #0b5e5e;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.2s ease;
-        }
-
-        .reference a:hover {
-            color: #f9a825;
-            text-decoration: underline;
         }
 
         .signature {
             font-size: 14px;
             color: #2c4a4a;
             font-weight: 500;
-            margin-top: 8px;
         }
 
         .signature a {
@@ -123,23 +174,26 @@
 
         hr {
             border: none;
-            border-top: 2px solid #c0cecc;
-            margin: 8px 0 16px 0;
+            border-top: 1px solid #c0cecc;
+            margin: 12px 0;
         }
 
         @media (max-width: 768px) {
             .header h1 { font-size: 22px; }
             .header .subtitle { font-size: 14px; }
-            .footer { padding: 20px; }
+            .btn { padding: 6px 16px; font-size: 12px; }
             .signature { font-size: 11px; }
         }
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container" id="flowchart-container">
     <div class="header">
         <h1>🔬 SFDA MDMA Bundling Decision Flowchart</h1>
         <div class="subtitle">Medical Devices & IVD Medical Devices</div>
+        <div class="reference-top">
+            📌 Reference: <a href="https://www.sfda.gov.sa/sites/default/files/2026-05/MDS-G28.pdf" target="_blank">SFDA MDS-G-028-V1 (2026)</a>
+        </div>
         <div class="divider"></div>
     </div>
 
@@ -157,76 +211,78 @@
     'clusterBkg': '#f0f4f3',
     'clusterBorder': '#c0cecc',
     'edgeLabelBackground':'#ffffff',
+    'edgeLabelColor':'#000000',
     'fontSize': '14px',
     'fontFamily': 'Segoe UI, Roboto, Arial, sans-serif'
   },
   'flowchart': {
     'curve': 'basis',
     'padding': 20,
-    'nodeSpacing': 50,
-    'rankSpacing': 50,
-    'htmlLabels': true
+    'nodeSpacing': 60,
+    'rankSpacing': 60,
+    'htmlLabels': true,
+    'useMaxWidth': false
   }
 }}%%
 
 flowchart TD
     START["🔬 START: List all devices for MDMA application"]
     
-    START --> MAIN_DECISION{"What type of device?"}
+    START --> MAIN_DECISION{"What type<br>of device?"}
     
-    MAIN_DECISION -->|"← Medical Devices →"| MEDICAL_START
-    MAIN_DECISION -->|"← IVD Medical Devices →"| IVD_START
+    MAIN_DECISION -->|"<b>← Medical Devices →</b>"| MEDICAL_START
+    MAIN_DECISION -->|"<b>← IVD Medical Devices →</b>"| IVD_START
     
     %% ==================== MEDICAL DEVICES PATHWAY ====================
     subgraph MEDICAL_START [MEDICAL DEVICES]
         direction TB
-        Q2{Do they have the<br>same legal manufacturer?}
+        Q2{"Do they have the<br>same legal manufacturer?"}
     end
     
-    Q2 -->|No| SEPARATE[Submit separate applications<br>Cannot bundle]
-    Q2 -->|Yes| Q3{Do they form a<br>Procedure Pack?}
+    Q2 -->|<b>No</b>| SEPARATE["Submit separate applications<br>Cannot bundle"]
+    Q2 -->|<b>Yes</b>| Q3{"Do they form a<br>Procedure Pack?"}
     
-    Q3 -->|Yes| PACK["📦 Procedure Pack Criteria<br>✔ Same intended use & specialty<br>✔ Same risk class of pack<br>✔ Max 5 TFs, Max 50 items<br>✔ Letter of agreement<br>✔ Submit TF for pack + each component"]
+    Q3 -->|<b>Yes</b>| PACK["📦 Procedure Pack Criteria<br>✔ Same intended use & specialty<br>✔ Same risk class of pack<br>✔ Max 5 TFs, Max 50 items<br>✔ Letter of agreement<br>✔ Submit TF for pack + each component"]
     
-    Q3 -->|No| Q4{Do they form a<br>System?<br>Used together for common purpose}
+    Q3 -->|<b>No</b>| Q4{"Do they form a<br>System?<br>Used together for common purpose"}
     
-    Q4 -->|Yes| SYSTEM["🖥️ System Criteria<br>✔ Same legal manufacturer<br>✔ Used in combination<br>✔ 1 system per application only<br>✔ Max 5 TFs, Max 50 items<br>✔ Highest risk class applies"]
+    Q4 -->|<b>Yes</b>| SYSTEM["🖥️ System Criteria<br>✔ Same legal manufacturer<br>✔ Used in combination<br>✔ 1 system per application only<br>✔ Max 5 TFs, Max 50 items<br>✔ Highest risk class applies"]
     
-    Q4 -->|No| Q5{Are they<br>Surgical Instruments?}
+    Q4 -->|<b>No</b>| Q5{"Are they<br>Surgical Instruments?"}
     
-    Q5 -->|Yes| SURGICAL["🔪 Surgical Instruments Family<br>✔ Same manufacturer, risk class<br>✔ Same FUNCTION (cut, grasp, retract...)<br>✔ NOT required: same intended use<br>✔ Max 5 TFs, Max 50 items"]
+    Q5 -->|<b>Yes</b>| SURGICAL["🔪 Surgical Instruments Family<br>✔ Same manufacturer, risk class<br>✔ Same FUNCTION (cut, grasp, retract...)<br>✔ NOT required: same intended use<br>✔ Max 5 TFs, Max 50 items"]
     
-    Q5 -->|No| Q6{Are they<br>Dental Instruments?}
+    Q5 -->|<b>No</b>| Q6{"Are they<br>Dental Instruments?"}
     
-    Q6 -->|Yes| DENTAL["🦷 Dental Instruments Family<br>✔ Same manufacturer, intended use<br>✔ Same SPECIALTY (12 specialties)<br>✔ Max 5 TFs, Max 50 items"]
+    Q6 -->|<b>Yes</b>| DENTAL["🦷 Dental Instruments Family<br>✔ Same manufacturer, intended use<br>✔ Same SPECIALTY (12 specialties)<br>✔ Max 5 TFs, Max 50 items"]
     
-    Q6 -->|No| Q7{Same intended use, risk class,<br>GMDN code, design, material, process?}
+    Q6 -->|<b>No</b>| Q7{"Same intended use, risk class,<br>GMDN code, design,<br>material, process?"}
     
-    Q7 -->|Yes| FAMILY["🏷️ Medical Device Family<br>✔ Max 5 TFs, Max 50 items<br>✔ Examples: catheters, guide wires, IOLs"]
+    Q7 -->|<b>Yes</b>| FAMILY["🏷️ Medical Device Family<br>✔ Max 5 TFs, Max 50 items<br>✔ Examples: catheters, guide wires, IOLs"]
     
-    Q7 -->|No| SEPARATE
+    Q7 -->|<b>No</b>| SEPARATE
     
     %% ==================== IVD MEDICAL DEVICES PATHWAY ====================
     subgraph IVD_START [IVD MEDICAL DEVICES]
         direction TB
-        IVD_Q1{Are they Class A exempt?<br>specimen containers, dyes, stains,<br>culture media, reagents,<br>tissue processing, cell culture supplies?}
+        IVD_Q1{"Are they Class A exempt?<br>specimen containers, dyes,<br>stains, culture media,<br>reagents, tissue processing,<br>cell culture supplies?"}
     end
     
-    IVD_Q1 -->|Yes| IVD_EXEMPT["🟢 Class A Exempt Bundle<br>✔ Different intended uses allowed<br>✔ Not subject to same TF rule<br>✔ Max 50 items total<br>❌ Excludes blood collection devices, lab machinery, powered systems"]
+    IVD_Q1 -->|<b>Yes</b>| IVD_EXEMPT["🟢 Class A Exempt Bundle<br>✔ Different intended uses allowed<br>✔ Not subject to same TF rule<br>✔ Max 50 items total<br>❌ Excludes blood collection devices,<br>lab machinery, powered systems"]
     
-    IVD_Q1 -->|No| IVD_Q2{Same legal manufacturer?}
+    IVD_Q1 -->|<b>No</b>| IVD_Q2{"Same legal manufacturer?"}
     
-    IVD_Q2 -->|No| SEPARATE
-    IVD_Q2 -->|Yes| IVD_Q3{Same risk class?}
+    IVD_Q2 -->|<b>No</b>| SEPARATE
+    IVD_Q2 -->|<b>Yes</b>| IVD_Q3{"Same risk class?"}
     
-    IVD_Q3 -->|No| SEPARATE
-    IVD_Q3 -->|Yes| IVD_Q4{Same intended use/purpose<br>AND same principle of operation?<br>e.g., all PCR, all chromatography}
+    IVD_Q3 -->|<b>No</b>| SEPARATE
+    IVD_Q3 -->|<b>Yes</b>| IVD_Q4{"Same intended use/purpose<br>AND same principle of operation?<br>e.g., all PCR, all chromatography"}
     
-    IVD_Q4 -->|No| SEPARATE
-    IVD_Q4 -->|Yes| IVD_Q5{Fall into ONE of 7 groupings?<br>1.Blood 2.Tissue 3.Cancer<br>4.Genetic 5.Infections<br>6.Non-infectious 7.Controls}
+    IVD_Q4 -->|<b>No</b>| SEPARATE
+    IVD_Q4 -->|<b>Yes</b>| IVD_Q5{"Fall into ONE of 7 groupings?<br>1.Blood 2.Tissue 3.Cancer<br>4.Genetic 5.Infections<br>6.Non-infectious 7.Controls"}
     
-    IVD_Q5 -->|No| SEPARATE
-    IVD_Q5 -->|Yes| IVD_BUNDLE["🔬 Standard IVD Bundle<br>✔ Same clinical/performance data = 1 TF<br>✔ Max 5 TFs per application<br>✔ Max 50 items per application"]
+    IVD_Q5 -->|<b>No</b>| SEPARATE
+    IVD_Q5 -->|<b>Yes</b>| IVD_BUNDLE["🔬 Standard IVD Bundle<br>✔ Same clinical/performance data = 1 TF<br>✔ Max 5 TFs per application<br>✔ Max 50 items per application"]
     
     %% ==================== LIMITS CHECK ====================
     PACK --> CHECK_MAX
@@ -237,10 +293,10 @@ flowchart TD
     IVD_EXEMPT --> CHECK_MAX
     IVD_BUNDLE --> CHECK_MAX
     
-    CHECK_MAX{Check limits:<br>Total items ≤ 50?<br>Total TFs ≤ 5?<br>System: only 1 system?}
+    CHECK_MAX{"Check limits:<br>Total items ≤ 50?<br>Total TFs ≤ 5?<br>System: only 1 system?"}
     
-    CHECK_MAX -->|Yes| SUBMIT["✅ SUCCESS: Proceed with single MDMA application"]
-    CHECK_MAX -->|No| SPLIT["⚠️ WARNING: Split into multiple applications"]
+    CHECK_MAX -->|<b>Yes</b>| SUBMIT["✅ SUCCESS: Proceed with<br>single MDMA application"]
+    CHECK_MAX -->|<b>No</b>| SPLIT["⚠️ WARNING: Split into<br>multiple applications"]
     
     SEPARATE --> END1["❌ Submit separate applications"]
     SUBMIT --> END2["✅ Submit bundled application"]
@@ -288,17 +344,21 @@ flowchart TD
         </pre>
     </div>
 
+    <!-- Button Bar for Sharing -->
+    <div class="button-bar">
+        <button class="btn btn-linkedin" id="shareLinkedinBtn">🔗 Share on LinkedIn</button>
+        <button class="btn btn-image" id="saveImageBtn">🖼️ Save as Image (PNG)</button>
+        <button class="btn btn-pdf" id="printPdfBtn">📄 Save as PDF</button>
+    </div>
+
     <div class="footer">
-        <div class="reference">
-            📌 Reference: 
-            <a href="https://www.sfda.gov.sa/sites/default/files/2026-05/MDS-G28.pdf" target="_blank" rel="noopener noreferrer">
-                SFDA MDS-G-028-V1 (2026)
-            </a>
+        <div class="signature">
+            <span>🔗</span> Jamaluddin - MSc |Market Access | Business Development | 
+            <a href="https://www.linkedin.com/in/jamaluddin-bd-qa" target="_blank">www.linkedin.com/in/jamaluddin-bd-qa</a>
         </div>
         <hr>
-        <div class="signature">
-            <span class="linkedin-icon">🔗</span> Jamaluddin | MSc | Market Access | Business Development | 
-            <a href="https://www.linkedin.com/in/jamaluddin-bd-qa" target="_blank" rel="noopener noreferrer">www.linkedin.com/in/jamaluddin-bd-qa</a>
+        <div style="font-size: 11px; color: #5a6e6e; margin-top: 8px;">
+            Based on SFDA Guidance MDS-G-028-V1 (2026) | For internal use only
         </div>
     </div>
 </div>
@@ -317,17 +377,120 @@ flowchart TD
             'clusterBkg': '#f0f4f3',
             'clusterBorder': '#c0cecc',
             'edgeLabelBackground': '#ffffff',
+            'edgeLabelColor': '#000000',
             'labelBackground': '#ffffff',
             'fontSize': '14px',
             'fontFamily': 'Segoe UI, Roboto, Arial, sans-serif'
         },
         flowchart: {
-            useMaxWidth: true,
+            useMaxWidth: false,
             htmlLabels: true,
             curve: 'basis',
             padding: 20
         }
     });
+
+    // Helper function to capture the flowchart container as image
+    function captureImage() {
+        return new Promise((resolve, reject) => {
+            const element = document.getElementById('flowchart-container');
+            // Increase scale for better quality
+            html2canvas(element, {
+                scale: 2,
+                backgroundColor: '#ffffff',
+                logging: false,
+                useCORS: true
+            }).then(canvas => {
+                resolve(canvas);
+            }).catch(error => {
+                console.error('Error capturing image:', error);
+                reject(error);
+            });
+        });
+    }
+
+    // Save as Image button
+    document.getElementById('saveImageBtn').addEventListener('click', async function() {
+        try {
+            const canvas = await captureImage();
+            const link = document.createElement('a');
+            link.download = 'lindkein-sfda-flowchart.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        } catch (error) {
+            alert('Error generating image. Please try again.');
+        }
+    });
+
+    // Print as PDF button
+    document.getElementById('printPdfBtn').addEventListener('click', async function() {
+        try {
+            const canvas = await captureImage();
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Lindkein - SFDA Flowchart</title>
+                    <style>
+                        body { margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; font-family: Arial, sans-serif; }
+                        img { max-width: 100%; height: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+                        .footer { text-align: center; margin-top: 20px; font-size: 12px; color: #555; }
+                    </style>
+                </head>
+                <body>
+                    <div>
+                        <img src="${canvas.toDataURL()}" alt="SFDA Flowchart" />
+                        <div class="footer">Lindkein | SFDA MDS-G-028-V1 (2026) | www.linkedin.com/in/jamaluddin-bd-qa</div>
+                    </div>
+                    <script>
+                        window.onload = function() { window.print(); setTimeout(function() { window.close(); }, 500); };
+                    <\/script>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+        } catch (error) {
+            alert('Error generating PDF. Please try again.');
+        }
+    });
+
+    // Share on LinkedIn button
+    document.getElementById('shareLinkedinBtn').addEventListener('click', async function() {
+        try {
+            const canvas = await captureImage();
+            // Convert canvas to blob for sharing
+            canvas.toBlob(async (blob) => {
+                const file = new File([blob], 'lindkein-sfda-flowchart.png', { type: 'image/png' });
+                
+                // Check if Web Share API is supported (mobile/desktop with share capability)
+                if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({
+                            title: 'SFDA MDMA Bundling Flowchart',
+                            text: 'Check out this comprehensive flowchart for SFDA MDMA bundling criteria (MDS-G-028-V1)',
+                            files: [file],
+                            url: 'https://Jamal-20.github.io/SFDA-MDMA-bundling/'
+                        });
+                    } catch (shareError) {
+                        // If share fails or user cancels, fallback to LinkedIn post URL
+                        fallbackLinkedInShare();
+                    }
+                } else {
+                    fallbackLinkedInShare();
+                }
+            }, 'image/png');
+        } catch (error) {
+            fallbackLinkedInShare();
+        }
+    });
+
+    function fallbackLinkedInShare() {
+        const url = encodeURIComponent('https://Jamal-20.github.io/SFDA-MDMA-bundling/');
+        const title = encodeURIComponent('SFDA MDMA Bundling Decision Flowchart');
+        const summary = encodeURIComponent('Interactive flowchart for Medical Devices & IVD Medical Devices bundling criteria based on SFDA Guidance MDS-G-028-V1 (2026). Created for Lindkein regulatory team.');
+        const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+        window.open(linkedInUrl, '_blank', 'width=600,height=500');
+    }
 </script>
 </body>
 </html>
