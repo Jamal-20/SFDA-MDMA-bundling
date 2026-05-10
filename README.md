@@ -4,6 +4,11 @@
 
 Interactive flowchart based on SFDA Guidance **MDS-G-028-V1 (2026)**.
 
+----
+## IVD Perspective
+![IVD Paths].(IVD_SFDA_Bundling.png)
+---
+
 ### Reference
 - Saudi Food and Drug Authority (SFDA)
 - Medical Devices Marketing Authorization (MDMA)
@@ -11,7 +16,6 @@ Interactive flowchart based on SFDA Guidance **MDS-G-028-V1 (2026)**.
 
 ### Author
 **Jamaluddin** | MSc Market Access | Business Development
-
 [LinkedIn Profile](https://www.linkedin.com/in/jamaluddin-bd-qa)
 
 ### Live Demo
