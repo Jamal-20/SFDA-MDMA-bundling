@@ -39,7 +39,7 @@
             gap: 20px;
         }
         .title-section {
-            flex: 2;
+            flex: 1;
         }
         .title-section h1 {
             font-size: 1.9rem;
@@ -70,16 +70,6 @@
         }
         .ref-block a:hover {
             color: #ffb74d;
-        }
-        .logo-area {
-            background: rgba(255,255,240,0.05);
-            padding: 12px 18px;
-            border-radius: 32px;
-        }
-        .logo-area .sfda-link {
-            font-weight: 700;
-            color: #ffd966;
-            font-size: 0.8rem;
         }
 
         .export-toolbar {
@@ -119,7 +109,7 @@
         .mermaid {
             display: flex;
             justify-content: center;
-            min-width: 1100px;
+            min-width: 1200px;
             background: #ffffff;
             padding: 1.5rem;
             border-radius: 28px;
@@ -164,9 +154,9 @@
             <h1>🔬 SFDA MDMA Bundling Decision Flowchart</h1>
             <div class="sub">Medical Devices & IVD Medical Devices</div>
             <div class="ref-block">
-            📌 Reference: <a href="https://www.sfda.gov.sa/sites/default/files/2026-05/MDS-G28.pdf" target="_blank">SFDA MDS-G-028-V1 (2026)</a>
+                📌 Reference: <a href="https://www.sfda.gov.sa/sites/default/files/2026-05/MDS-G28.pdf" target="_blank">SFDA MDS-G-028-V1 (2026)</a>
+            </div>
         </div>
-        <div class="divider"></div>
     </div>
     
     <div class="export-toolbar">
@@ -183,36 +173,42 @@ flowchart TD
     TYPE -->|Medical Devices| MED_START
     TYPE -->|IVD Medical Devices| IVD_START
     
-    MED_START[Medical Devices Pathway] --> M1{Same legal manufacturer?}
-    M1 -->|NO| SEPARATE["Submit separate applications"]
-    M1 -->|YES| M2{Procedure Pack?}
+    subgraph MED_BOX [🏥 MEDICAL DEVICES WORKFLOW]
+        direction TB
+        MED_START[Medical Devices Pathway] --> M1{Same legal manufacturer?}
+        M1 -->|NO| SEPARATE["Submit separate applications"]
+        M1 -->|YES| M2{Procedure Pack?}
+        
+        M2 -->|YES| PACK["PROCEDURE PACK<br/>Same intended use + specialty<br/>Max 5 TFs, Max 50 items<br/>Letter of agreement required"]
+        M2 -->|NO| M3{System? Used together}
+        
+        M3 -->|YES| SYSTEM["SYSTEM<br/>Same manufacturer<br/>1 system per app<br/>Max 5 TFs, Max 50 items"]
+        M3 -->|NO| M4{Surgical Instruments?}
+        
+        M4 -->|YES| SURGICAL["SURGICAL INSTRUMENTS<br/>Same manufacturer, same risk class<br/>Same function<br/>Max 5 TFs, Max 50 items"]
+        M4 -->|NO| M5{Dental Instruments?}
+        
+        M5 -->|YES| DENTAL["DENTAL INSTRUMENTS<br/>Same manufacturer, intended use<br/>Same specialty<br/>Max 5 TFs, Max 50 items"]
+        M5 -->|NO| M6{Same intended use, risk class,<br/>GMDN code, design, material?}
+        
+        M6 -->|YES| FAMILY["MEDICAL DEVICE FAMILY<br/>Same device family<br/>Max 5 TFs, Max 50 items"]
+        M6 -->|NO| SEPARATE
+    end
     
-    M2 -->|YES| PACK["PROCEDURE PACK<br/>Same intended use + specialty<br/>Max 5 TFs, Max 50 items<br/>Letter of agreement required"]
-    M2 -->|NO| M3{System? Used together}
-    
-    M3 -->|YES| SYSTEM["SYSTEM<br/>Same manufacturer<br/>1 system per app<br/>Max 5 TFs, Max 50 items"]
-    M3 -->|NO| M4{Surgical Instruments?}
-    
-    M4 -->|YES| SURGICAL["SURGICAL INSTRUMENTS<br/>Same manufacturer, same risk class<br/>Same function<br/>Max 5 TFs, Max 50 items"]
-    M4 -->|NO| M5{Dental Instruments?}
-    
-    M5 -->|YES| DENTAL["DENTAL INSTRUMENTS<br/>Same manufacturer, intended use<br/>Same specialty<br/>Max 5 TFs, Max 50 items"]
-    M5 -->|NO| M6{Same intended use, risk class,<br/>GMDN code, design, material?}
-    
-    M6 -->|YES| FAMILY["MEDICAL DEVICE FAMILY<br/>Same device family<br/>Max 5 TFs, Max 50 items"]
-    M6 -->|NO| SEPARATE
-    
-    IVD_START[IVD Pathway] --> IV1{Class A exempt?<br/>Specimen containers, stains,<br/>reagents, culture media}
-    IV1 -->|YES| EXEMPT["CLASS A EXEMPT BUNDLE<br/>Different intended uses allowed<br/>Max 50 items total"]
-    IV1 -->|NO| IV2{Same legal manufacturer?}
-    IV2 -->|NO| SEPARATE
-    IV2 -->|YES| IV3{Same risk class?}
-    IV3 -->|NO| SEPARATE
-    IV3 -->|YES| IV4{Same intended use +<br/>same principle of operation?}
-    IV4 -->|NO| SEPARATE
-    IV4 -->|YES| IV5{One of 7 groupings?<br/>Blood, Tissue, Cancer, Genetic<br/>Infections, Non-infectious, Controls}
-    IV5 -->|NO| SEPARATE
-    IV5 -->|YES| BUNDLE["STANDARD IVD BUNDLE<br/>Shared performance data = 1 TF<br/>Max 5 TFs, Max 50 items"]
+    subgraph IVD_BOX [🔬 IVD MEDICAL DEVICES WORKFLOW]
+        direction TB
+        IVD_START[IVD Pathway] --> IV1{Class A exempt?<br/>Specimen containers, stains,<br/>reagents, culture media}
+        IV1 -->|YES| EXEMPT["CLASS A EXEMPT BUNDLE<br/>Different intended uses allowed<br/>Max 50 items total"]
+        IV1 -->|NO| IV2{Same legal manufacturer?}
+        IV2 -->|NO| SEPARATE
+        IV2 -->|YES| IV3{Same risk class?}
+        IV3 -->|NO| SEPARATE
+        IV3 -->|YES| IV4{Same intended use +<br/>same principle of operation?}
+        IV4 -->|NO| SEPARATE
+        IV4 -->|YES| IV5{One of 7 groupings?<br/>Blood, Tissue, Cancer, Genetic<br/>Infections, Non-infectious, Controls}
+        IV5 -->|NO| SEPARATE
+        IV5 -->|YES| BUNDLE["STANDARD IVD BUNDLE<br/>Shared performance data = 1 TF<br/>Max 5 TFs, Max 50 items"]
+    end
     
     PACK --> CHECK
     SYSTEM --> CHECK
@@ -230,10 +226,16 @@ flowchart TD
     SUCCESS --> END2["Submit bundled application"]
     WARNING --> END3["Revise bundling strategy"]
     
+    %% Box styling
+    style MED_BOX fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px,stroke-dasharray: 5 2,rx:12,ry:12
+    style IVD_BOX fill:#e3f2fd,stroke:#1565c0,stroke-width:3px,stroke-dasharray: 5 2,rx:12,ry:12
+    
+    %% Node styling
     style START fill:#0b5e5e,stroke:#043434,stroke-width:2px,color:#fff
     style TYPE fill:#f9a825,stroke:#e59400,stroke-width:3px,color:#000,font-weight:bold
-    style MED_START fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px,color:#000,font-weight:bold
-    style IVD_START fill:#e3f2fd,stroke:#1565c0,stroke-width:3px,color:#000,font-weight:bold
+    
+    style MED_START fill:#2e7d32,stroke:#1b5e20,stroke-width:3px,color:#fff,font-weight:bold
+    style IVD_START fill:#1565c0,stroke:#0d47a1,stroke-width:3px,color:#fff,font-weight:bold
     
     style M1 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
     style M2 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
@@ -263,7 +265,8 @@ flowchart TD
     style END2 fill:#2b9348,stroke:#1f723a,stroke-width:2px,color:#fff
     style END3 fill:#f4a261,stroke:#bb6b2e,stroke-width:2px,color:#fff
     
-    linkStyle default stroke:#2b7a6e,stroke-width:2px
+    %% Edge styling for YES/NO labels to be bold and visible
+    linkStyle default stroke:#2b7a6e,stroke-width:2.5px
         </pre>
     </div>
 
@@ -275,7 +278,7 @@ flowchart TD
             <span>🔸 IVD Class A exempt: flexible grouping</span>
         </div>
         <div class="signature-block">
-            🔗 <strong>Jamaluddin - Msc</strong>| Market Access | Business Development |
+            🔗 <strong>Jamaluddin - MSc</strong> | Market Access | Business Development |
             &nbsp;·&nbsp;
             <a href="https://www.linkedin.com/in/jamaluddin-bd-qa" target="_blank">linkedin.com/in/jamaluddin-bd-qa</a>
         </div>
@@ -298,13 +301,15 @@ flowchart TD
                 'secondaryColor': '#f9a825',
                 'tertiaryColor': '#f0f9f4',
                 'fontSize': '14px',
-                'fontFamily': 'Inter, Segoe UI, Roboto, sans-serif'
+                'fontFamily': 'Inter, Segoe UI, Roboto, sans-serif',
+                'edgeLabelBackground':'#ffffff',
+                'labelTextColor':'#000000'
             },
             flowchart: {
                 useMaxWidth: true,
                 htmlLabels: true,
                 curve: 'basis',
-                padding: 15
+                padding: 20
             },
             securityLevel: 'loose',
         });
@@ -314,7 +319,20 @@ flowchart TD
             if (svg) {
                 svg.setAttribute('style', 'max-width: 100%; height: auto;');
             }
-        }, 500);
+            // Make YES/NO labels bold and visible
+            const labels = document.querySelectorAll('.edgeLabel');
+            labels.forEach(label => {
+                if (label.textContent === 'YES' || label.textContent === 'NO') {
+                    label.style.fontWeight = 'bold';
+                    label.style.fontSize = '13px';
+                    label.style.fontFamily = 'monospace';
+                    label.style.backgroundColor = '#ffffff';
+                    label.style.border = '1px solid #2b7a6e';
+                    label.style.borderRadius = '12px';
+                    label.style.padding = '2px 8px';
+                }
+            });
+        }, 800);
         
         const captureElement = document.getElementById('flowchartCaptureArea');
         
@@ -345,6 +363,7 @@ flowchart TD
             printWindow.document.write('.card { max-width: 100%; margin: 0; box-shadow: none; }');
             printWindow.document.write('.hero { background: #0b5e5e; }');
             printWindow.document.write('.mermaid-wrapper { overflow: visible; }');
+            printWindow.document.write('.edgeLabel { font-weight: bold !important; background: white !important; }');
             printWindow.document.write('</style>');
             printWindow.document.write('</head><body>');
             printWindow.document.write(cloneCard.outerHTML);
