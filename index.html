@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SFDA MDMA New Bundling Flowchart</title>
+    <title>SFDA MDMA Bundling Flowchart </title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         * {
@@ -139,7 +139,7 @@
 <div class="container">
     <div class="header">
         <h1>🔬 SFDA MDMA Bundling Decision Flowchart</h1>
-        <div class="subtitle">IVD & Other Medical Devices</div>
+        <div class="subtitle">Medical Devices & IVD Medical Devices</div>
         <div class="divider"></div>
     </div>
 
@@ -174,11 +174,11 @@ flowchart TD
     
     START --> MAIN_DECISION{"What type of device?"}
     
-    MAIN_DECISION -->|"← Others Medical Devices →"| Others_MD_START
+    MAIN_DECISION -->|"← Medical Devices →"| MEDICAL_START
     MAIN_DECISION -->|"← IVD Medical Devices →"| IVD_START
     
     %% ==================== MEDICAL DEVICES PATHWAY ====================
-    subgraph Others_MD_START [Other MEDICAL DEVICES]
+    subgraph MEDICAL_START [MEDICAL DEVICES]
         direction TB
         Q2{Do they have the<br>same legal manufacturer?}
     end
@@ -206,7 +206,7 @@ flowchart TD
     
     Q7 -->|No| SEPARATE
     
-    %% ==================== IVD PATHWAY ====================
+    %% ==================== IVD MEDICAL DEVICES PATHWAY ====================
     subgraph IVD_START [IVD MEDICAL DEVICES]
         direction TB
         IVD_Q1{Are they Class A exempt?<br>specimen containers, dyes, stains,<br>culture media, reagents,<br>tissue processing, cell culture supplies?}
@@ -250,7 +250,7 @@ flowchart TD
     style START fill:#0b5e5e,stroke:#063838,stroke-width:2px,color:#fff
     style MAIN_DECISION fill:#f9a825,stroke:#d48a00,stroke-width:3px,color:#000
     
-    style NON_IVD_START fill:#e8f5e9,stroke:#4caf50,stroke-width:2px,color:#000
+    style MEDICAL_START fill:#e8f5e9,stroke:#4caf50,stroke-width:2px,color:#000
     style IVD_START fill:#e3f2fd,stroke:#2196f3,stroke-width:2px,color:#000
     
     style Q2 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
