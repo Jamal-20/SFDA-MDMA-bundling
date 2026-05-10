@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SFDA MDMA Bundling Flowchart </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SFDA MDMA Bundling Flowchart | MDS-G028 Decision Tool</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
@@ -14,350 +14,347 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
-            background: linear-gradient(135deg, #e0ecea 0%, #cbdcd9 100%);
+            font-family: 'Inter', 'Segoe UI', 'Roboto', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #d5eae5 0%, #c0dbd4 100%);
             min-height: 100vh;
-            padding: 30px 20px;
+            padding: 32px 24px;
         }
 
-        .container {
-            max-width: 1300px;
+        .card {
+            max-width: 1480px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             overflow: hidden;
         }
 
-        /* Header - Compact */
-        .header {
-            background: linear-gradient(135deg, #0b5e5e 0%, #063838 100%);
+        .hero {
+            background: linear-gradient(112deg, #0b5e5e 0%, #074343 100%);
+            padding: 1.8rem 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+        .title-section {
+            flex: 2;
+        }
+        .title-section h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
             color: white;
-            padding: 20px 32px;
-            text-align: center;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
         }
-
-        .header h1 {
-            font-size: 26px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .header .subtitle {
-            font-size: 15px;
-            opacity: 0.9;
+        .title-section .sub {
+            color: #dcfce8;
+            font-size: 1rem;
+            font-weight: 450;
             margin-bottom: 12px;
         }
-
-        .reference-top {
-            background: rgba(255, 255, 255, 0.15);
+        .ref-block {
+            background: rgba(0,0,0,0.2);
             display: inline-block;
-            padding: 6px 18px;
-            border-radius: 30px;
-            font-size: 12px;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
         }
-
-        .reference-top a {
-            color: #ffd966;
+        .ref-block a {
+            color: #ffde9c;
             text-decoration: none;
-            font-weight: bold;
+        }
+        .ref-block a:hover {
+            color: #ffb74d;
+        }
+        .logo-area {
+            background: rgba(255,255,240,0.05);
+            padding: 12px 18px;
+            border-radius: 32px;
+        }
+        .logo-area .sfda-link {
+            font-weight: 700;
+            color: #ffd966;
+            font-size: 0.8rem;
         }
 
-        .reference-top a:hover {
-            text-decoration: underline;
+        .export-toolbar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 14px;
+            padding: 12px 24px;
+            background: #f8fbfa;
+            border-bottom: 1px solid #ddeae6;
+        }
+        .btn-export {
+            background: white;
+            border: 1px solid #c1dbd4;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #1c6b64;
+            font-family: inherit;
+        }
+        .btn-export:hover {
+            background: #eef6f3;
+            border-color: #0b5e5e;
+            transform: scale(1.01);
         }
 
-        /* Flowchart Area - No extra space */
-        .flowchart-area {
-            padding: 20px 24px;
-            background: #fafbfb;
+        .mermaid-wrapper {
+            padding: 2rem 1.8rem;
+            background: #fefef7;
             overflow-x: auto;
         }
-
         .mermaid {
             display: flex;
             justify-content: center;
-            background: white;
-            padding: 15px;
-            border-radius: 12px;
             min-width: 1100px;
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 28px;
         }
 
-        /* Button Bar */
-        .button-bar {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            padding: 15px 24px;
-            background: #f0f4f3;
-            border-top: 1px solid #d0dad8;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 8px 22px;
-            border-radius: 40px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-
-        .btn-linkedin { background: #0077b5; color: white; }
-        .btn-linkedin:hover { background: #005e8c; transform: scale(1.02); }
-        .btn-pdf { background: #d32f2f; color: white; }
-        .btn-pdf:hover { background: #b71c1c; transform: scale(1.02); }
-        .btn-image { background: #0b5e5e; color: white; }
-        .btn-image:hover { background: #084848; transform: scale(1.02); }
-
-        /* Footer */
-        .footer {
-            background: #f0f4f3;
-            padding: 16px 40px;
+        .info-footer {
+            background: #f4f9f7;
+            padding: 1.4rem 2rem 1.8rem;
             text-align: center;
-            border-top: 1px solid #d0dad8;
         }
-
-        .signature {
-            font-size: 13px;
-            color: #2c4a4a;
+        .signature-block {
+            font-size: 0.85rem;
+            color: #2b5e5a;
+            border-top: 1px solid #c8e0db;
+            padding-top: 1rem;
         }
-
-        .signature a {
-            color: #0b5e5e;
+        .signature-block a {
+            color: #0f6b6b;
             text-decoration: none;
-            border-bottom: 1px solid #0b5e5e;
+            font-weight: 600;
         }
-
-        .footer-note {
-            font-size: 10px;
-            color: #5a6e6e;
-            margin-top: 8px;
+        .legend-tip {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #2f6b64;
+            margin-bottom: 12px;
         }
-
-        hr {
-            border: none;
-            border-top: 1px solid #c0cecc;
-            margin: 10px 0;
+        @media (max-width: 780px) {
+            .hero { flex-direction: column; align-items: flex-start; }
+            .title-section h1 { font-size: 1.3rem; }
         }
     </style>
 </head>
 <body>
-<div class="container" id="flowchart-container">
-    <div class="header">
-        <h1>🔬 SFDA MDMA Bundling Decision Flowchart</h1>
-        <div class="subtitle">Medical Devices & IVD Medical Devices</div>
-        <div class="reference-top">
-            📌 <a href="https://www.sfda.gov.sa/sites/default/files/2026-05/MDS-G28.pdf" target="_blank">SFDA MDS-G-028-V1 (2026)</a>
+<div class="card" id="flowchartCaptureArea">
+    <div class="hero">
+        <div class="title-section">
+            <h1>🔬 SFDA MDMA Bundling Decision Flowchart</h1>
+            <div class="sub">Medical Devices & IVD Medical Devices</div>
+            <div class="ref-block">
+            📌 Reference: <a href="https://www.sfda.gov.sa/sites/default/files/2026-05/MDS-G28.pdf" target="_blank">SFDA MDS-G-028-V1 (2026)</a>
         </div>
+        <div class="divider"></div>
+    </div>
+    
+    <div class="export-toolbar">
+        <button class="btn-export" id="exportPNGbtn">📸 Save as PNG (LinkedIn/Share)</button>
+        <button class="btn-export" id="exportPDFbtn">📄 Save as PDF</button>
     </div>
 
-    <div class="flowchart-area">
+    <div class="mermaid-wrapper">
         <pre class="mermaid">
----
-title: SFDA MDMA Bundling Criteria
----
 flowchart TD
-    START["🔬 START: List all devices for MDMA application"]
+    START["START: Device list for MDMA application"]
+    START --> TYPE{Device category?}
     
-    START --> DECISION{"What type of device?"}
+    TYPE -->|Medical Devices| MED_START
+    TYPE -->|IVD Medical Devices| IVD_START
     
-    DECISION -->|"<b style='color:#000;background:#fff;padding:2px 8px;border-radius:12px;'>← Medical Devices →</b>"| MEDICAL
-    DECISION -->|"<b style='color:#000;background:#fff;padding:2px 8px;border-radius:12px;'>← IVD Medical Devices →</b>"| IVD
-
-    %% ==================== MEDICAL DEVICES SECTION ====================
-    subgraph MEDICAL [🏥 MEDICAL DEVICES]
-        direction TB
-        M1{"Same legal<br>manufacturer?"}
-        M2{"Procedure<br>Pack?"}
-        M3{"System?"}
-        M4{"Surgical<br>Instruments?"}
-        M5{"Dental<br>Instruments?"}
-        M6{"Same intended use,<br>risk class, design,<br>material, process?"}
-        
-        M1 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| SEPARATE1["❌ Submit separate apps"]
-        M1 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| M2
-        
-        M2 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| PACK["📦 Procedure Pack<br>✔ Same intended use<br>✔ Same risk class<br>✔ Max 5 TFs, 50 items<br>✔ Letter of agreement"]
-        M2 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| M3
-        
-        M3 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| SYSTEM["🖥️ System<br>✔ Used together<br>✔ 1 system per app<br>✔ Highest risk class"]
-        M3 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| M4
-        
-        M4 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| SURGICAL["🔪 Surgical Family<br>✔ Same function only<br>✔ Same manufacturer<br>✔ Max 5 TFs, 50 items"]
-        M4 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| M5
-        
-        M5 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| DENTAL["🦷 Dental Family<br>✔ Same specialty<br>✔ Same manufacturer<br>✔ Max 5 TFs, 50 items"]
-        M5 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| M6
-        
-        M6 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| FAMILY["🏷️ Device Family<br>✔ Same GMDN, design<br>✔ Max 5 TFs, 50 items"]
-        M6 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| SEPARATE1
-    end
-
-    %% ==================== IVD SECTION ====================
-    subgraph IVD [🧪 IVD MEDICAL DEVICES]
-        direction TB
-        I1{"Class A exempt?<br>(containers, dyes,<br>media, reagents)"}
-        I2{"Same legal<br>manufacturer?"}
-        I3{"Same risk<br>class?"}
-        I4{"Same intended use<br>& principle of<br>operation?"}
-        I5{"In 1 of 7<br>groupings?"}
-        
-        I1 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| EXEMPT["🟢 Class A Exempt<br>✔ Different intended uses OK<br>✔ Max 50 items"]
-        I1 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| I2
-        
-        I2 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| SEPARATE2["❌ Submit separate apps"]
-        I2 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| I3
-        
-        I3 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| SEPARATE2
-        I3 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| I4
-        
-        I4 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| SEPARATE2
-        I4 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| I5
-        
-        I5 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| SEPARATE2
-        I5 -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| BUNDLE["🔬 Standard IVD Bundle<br>✔ Same performance data = 1 TF<br>✔ Max 5 TFs, 50 items"]
-    end
-
-    %% ==================== LIMITS CHECK ====================
-    PACK --> LIMITS
-    SYSTEM --> LIMITS
-    SURGICAL --> LIMITS
-    DENTAL --> LIMITS
-    FAMILY --> LIMITS
-    EXEMPT --> LIMITS
-    BUNDLE --> LIMITS
-    SEPARATE1 --> END1
-    SEPARATE2 --> END1
-
-    LIMITS{"Check limits:<br>Items ≤ 50?<br>TFs ≤ 5?<br>1 system only?"}
+    MED_START[Medical Devices Pathway] --> M1{Same legal manufacturer?}
+    M1 -->|NO| SEPARATE["Submit separate applications"]
+    M1 -->|YES| M2{Procedure Pack?}
     
-    LIMITS -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>Yes</b>"| SUCCESS["✅ Proceed with single MDMA application"]
-    LIMITS -->|"<b style='color:#000;background:#fff;padding:2px 6px;border-radius:10px;'>No</b>"| WARNING["⚠️ Split into multiple applications"]
+    M2 -->|YES| PACK["PROCEDURE PACK<br/>Same intended use + specialty<br/>Max 5 TFs, Max 50 items<br/>Letter of agreement required"]
+    M2 -->|NO| M3{System? Used together}
     
-    SUCCESS --> END2
-    WARNING --> END3
+    M3 -->|YES| SYSTEM["SYSTEM<br/>Same manufacturer<br/>1 system per app<br/>Max 5 TFs, Max 50 items"]
+    M3 -->|NO| M4{Surgical Instruments?}
     
-    END1(["❌ Submit separate applications"])
-    END2(["✅ Submit bundled application"])
-    END3(["⚠️ Re-evaluate strategy"])
-
-    %% ==================== STYLES ====================
-    style START fill:#0b5e5e,stroke:#063838,stroke-width:2px,color:#fff
-    style DECISION fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    M4 -->|YES| SURGICAL["SURGICAL INSTRUMENTS<br/>Same manufacturer, same risk class<br/>Same function<br/>Max 5 TFs, Max 50 items"]
+    M4 -->|NO| M5{Dental Instruments?}
     
-    style MEDICAL fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#000
-    style IVD fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#000
+    M5 -->|YES| DENTAL["DENTAL INSTRUMENTS<br/>Same manufacturer, intended use<br/>Same specialty<br/>Max 5 TFs, Max 50 items"]
+    M5 -->|NO| M6{Same intended use, risk class,<br/>GMDN code, design, material?}
     
-    style M1 fill:#f9a825,stroke:#d48a00,stroke-width:1.5px,color:#000
-    style M2 fill:#f9a825,stroke:#d48a00,stroke-width:1.5px,color:#000
-    style M3 fill:#f9a825,stroke:#d48a00,stroke-width:1.5px,color:#000
-    style M4 fill:#f9a825,stroke:#d48a00,stroke-width:1.5px,color:#000
-    style M5 fill:#f9a825,stroke:#d48a00,stroke-width:1.5px,color:#000
-    style M6 fill:#f9a825,stroke:#d48a00,stroke-width:1.5px,color:#000
+    M6 -->|YES| FAMILY["MEDICAL DEVICE FAMILY<br/>Same device family<br/>Max 5 TFs, Max 50 items"]
+    M6 -->|NO| SEPARATE
     
-    style I1 fill:#f9a825,stroke:#d48a00,stroke-width:1.5px,color:#000
-    style I2 fill:#f9a825,stroke:#d48a00,stroke-width:1.5px,color:#000
-    style I3 fill:#f9a825,stroke:#d48a00,stroke-width:1.5px,color:#000
-    style I4 fill:#f9a825,stroke:#d48a00,stroke-width:1.5px,color:#000
-    style I5 fill:#f9a825,stroke:#d48a00,stroke-width:1.5px,color:#000
-    style LIMITS fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    IVD_START[IVD Pathway] --> IV1{Class A exempt?<br/>Specimen containers, stains,<br/>reagents, culture media}
+    IV1 -->|YES| EXEMPT["CLASS A EXEMPT BUNDLE<br/>Different intended uses allowed<br/>Max 50 items total"]
+    IV1 -->|NO| IV2{Same legal manufacturer?}
+    IV2 -->|NO| SEPARATE
+    IV2 -->|YES| IV3{Same risk class?}
+    IV3 -->|NO| SEPARATE
+    IV3 -->|YES| IV4{Same intended use +<br/>same principle of operation?}
+    IV4 -->|NO| SEPARATE
+    IV4 -->|YES| IV5{One of 7 groupings?<br/>Blood, Tissue, Cancer, Genetic<br/>Infections, Non-infectious, Controls}
+    IV5 -->|NO| SEPARATE
+    IV5 -->|YES| BUNDLE["STANDARD IVD BUNDLE<br/>Shared performance data = 1 TF<br/>Max 5 TFs, Max 50 items"]
     
-    style PACK fill:#2196f3,stroke:#0b5e5e,stroke-width:1.5px,color:#fff
-    style SYSTEM fill:#9c27b0,stroke:#6a1b9a,stroke-width:1.5px,color:#fff
-    style SURGICAL fill:#ff9800,stroke:#e65100,stroke-width:1.5px,color:#fff
-    style DENTAL fill:#ff9800,stroke:#e65100,stroke-width:1.5px,color:#fff
-    style FAMILY fill:#4caf50,stroke:#2e7d32,stroke-width:1.5px,color:#fff
-    style EXEMPT fill:#4caf50,stroke:#2e7d32,stroke-width:1.5px,color:#fff
-    style BUNDLE fill:#2196f3,stroke:#0b5e5e,stroke-width:1.5px,color:#fff
+    PACK --> CHECK
+    SYSTEM --> CHECK
+    SURGICAL --> CHECK
+    DENTAL --> CHECK
+    FAMILY --> CHECK
+    EXEMPT --> CHECK
+    BUNDLE --> CHECK
     
-    style SUCCESS fill:#4caf50,stroke:#2e7d32,stroke-width:2px,color:#fff
-    style WARNING fill:#ff9800,stroke:#e65100,stroke-width:2px,color:#fff
+    CHECK{"Limits Check<br/>Items ≤ 50?<br/>TFs ≤ 5?"}
+    CHECK -->|YES| SUCCESS["SUCCESS: Single MDMA application"]
+    CHECK -->|NO| WARNING["WARNING: Split into multiple apps"]
     
-    style SEPARATE1 fill:#f44336,stroke:#c62828,stroke-width:1.5px,color:#fff
-    style SEPARATE2 fill:#f44336,stroke:#c62828,stroke-width:1.5px,color:#fff
-    style END1 fill:#f44336,stroke:#c62828,stroke-width:1.5px,color:#fff
-    style END2 fill:#4caf50,stroke:#2e7d32,stroke-width:1.5px,color:#fff
-    style END3 fill:#ff9800,stroke:#e65100,stroke-width:1.5px,color:#fff
+    SEPARATE --> END1["Submit separate applications"]
+    SUCCESS --> END2["Submit bundled application"]
+    WARNING --> END3["Revise bundling strategy"]
     
-    linkStyle default stroke:#1a5a5a,stroke-width:2px
+    style START fill:#0b5e5e,stroke:#043434,stroke-width:2px,color:#fff
+    style TYPE fill:#f9a825,stroke:#e59400,stroke-width:3px,color:#000,font-weight:bold
+    style MED_START fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px,color:#000,font-weight:bold
+    style IVD_START fill:#e3f2fd,stroke:#1565c0,stroke-width:3px,color:#000,font-weight:bold
+    
+    style M1 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
+    style M2 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
+    style M3 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
+    style M4 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
+    style M5 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
+    style M6 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
+    style IV1 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
+    style IV2 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
+    style IV3 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
+    style IV4 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
+    style IV5 fill:#f9a825,stroke:#c97e00,stroke-width:2px,color:#000,font-weight:bold
+    style CHECK fill:#f7b05e,stroke:#b4621a,stroke-width:2px,color:#000,font-weight:bold
+    
+    style PACK fill:#2c7da0,stroke:#175d73,stroke-width:2px,color:#fff
+    style SYSTEM fill:#8e6c88,stroke:#4b2e4a,stroke-width:2px,color:#fff
+    style SURGICAL fill:#e67e22,stroke:#b45f1b,stroke-width:2px,color:#fff
+    style DENTAL fill:#e67e22,stroke:#b45f1b,stroke-width:2px,color:#fff
+    style FAMILY fill:#2e9b6e,stroke:#1d6b48,stroke-width:2px,color:#fff
+    style EXEMPT fill:#2e9b6e,stroke:#1f704b,stroke-width:2px,color:#fff
+    style BUNDLE fill:#3b8db0,stroke:#1f617d,stroke-width:2px,color:#fff
+    style SEPARATE fill:#d9534f,stroke:#b52b27,stroke-width:2px,color:#fff
+    
+    style SUCCESS fill:#38a169,stroke:#276749,stroke-width:3px,color:#fff
+    style WARNING fill:#ed8936,stroke:#c05621,stroke-width:2px,color:#fff
+    style END1 fill:#c23b22,stroke:#9e2a1b,stroke-width:2px,color:#fff
+    style END2 fill:#2b9348,stroke:#1f723a,stroke-width:2px,color:#fff
+    style END3 fill:#f4a261,stroke:#bb6b2e,stroke-width:2px,color:#fff
+    
+    linkStyle default stroke:#2b7a6e,stroke-width:2px
         </pre>
     </div>
 
-    <div class="button-bar">
-        <button class="btn btn-linkedin" id="shareLinkedinBtn">🔗 Share on LinkedIn</button>
-        <button class="btn btn-image" id="saveImageBtn">🖼️ Save as Image (PNG)</button>
-        <button class="btn btn-pdf" id="printPdfBtn">📄 Save as PDF</button>
-    </div>
-
-    <div class="footer">
-        <div class="signature">
-            🔗 Jamaluddin - MSc | Market Access | Business Development | 
-            <a href="https://www.linkedin.com/in/jamaluddin-bd-qa" target="_blank">www.linkedin.com/in/jamaluddin-bd-qa</a>
+    <div class="info-footer">
+        <div class="legend-tip">
+            <span>🔹 Max 5 Technical Files (TFs) per application</span>
+            <span>🔸 Max 50 items per application</span>
+            <span>🔹 Procedure Pack / System require agreements</span>
+            <span>🔸 IVD Class A exempt: flexible grouping</span>
         </div>
-        <div class="footer-note">
-            Based on SFDA Guidance MDS-G-028-V1 (2026) | For internal use only
+        <div class="signature-block">
+            🔗 <strong>Jamaluddin - Msc</strong>| Market Access | Business Development |
+            &nbsp;·&nbsp;
+            <a href="https://www.linkedin.com/in/jamaluddin-bd-qa" target="_blank">linkedin.com/in/jamaluddin-bd-qa</a>
+        </div>
+        <div style="font-size: 11px; margin-top: 8px; color: #557c78;">
+            Based on MDS-G028 V1 — decision tree for MDMA bundling (Medical Devices & IVDs)
         </div>
     </div>
 </div>
 
 <script>
-    mermaid.initialize({ 
-        startOnLoad: true,
-        theme: 'base',
-        themeVariables: {
-            'primaryColor': '#0b5e5e',
-            'primaryTextColor': '#ffffff',
-            'primaryBorderColor': '#063838',
-            'lineColor': '#1a5a5a',
-            'secondaryColor': '#f9a825',
-            'tertiaryColor': '#e8f5e9',
-            'clusterBkg': '#f0f4f3',
-            'clusterBorder': '#c0cecc',
-            'fontSize': '13px',
-            'fontFamily': 'Segoe UI, Roboto, Arial, sans-serif'
-        },
-        flowchart: {
-            useMaxWidth: true,
-            htmlLabels: true,
-            curve: 'basis',
-            padding: 15
-        }
-    });
-
-    async function captureImage() {
-        const element = document.getElementById('flowchart-container');
-        const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#ffffff' });
-        return canvas;
-    }
-
-    document.getElementById('saveImageBtn').addEventListener('click', async () => {
-        const canvas = await captureImage();
-        const link = document.createElement('a');
-        link.download = 'lindkein-sfda-flowchart.png';
-        link.href = canvas.toDataURL();
-        link.click();
-    });
-
-    document.getElementById('printPdfBtn').addEventListener('click', async () => {
-        const canvas = await captureImage();
-        const win = window.open('', '_blank');
-        win.document.write(`
-            <html><head><title>Lindkein - SFDA Flowchart</title>
-            <style>body{margin:0;padding:20px;text-align:center;} img{max-width:100%;}</style></head>
-            <body><img src="${canvas.toDataURL()}" /><div style="margin-top:20px;font-size:12px;">Jamaluddin | www.linkedin.com/in/jamaluddin-bd-qa</div>
-            <script>window.onload=function(){window.print();setTimeout(function(){window.close();},500);};<\/script>
-            </body></html>
-        `);
-        win.document.close();
-    });
-
-    document.getElementById('shareLinkedinBtn').addEventListener('click', () => {
-        const url = encodeURIComponent('https://Jamal-20.github.io/SFDA-MDMA-bundling/');
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=500');
-    });
+    (function() {
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                'primaryColor': '#0b5e5e',
+                'primaryTextColor': '#ffffff',
+                'primaryBorderColor': '#064545',
+                'lineColor': '#1e6b66',
+                'secondaryColor': '#f9a825',
+                'tertiaryColor': '#f0f9f4',
+                'fontSize': '14px',
+                'fontFamily': 'Inter, Segoe UI, Roboto, sans-serif'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 15
+            },
+            securityLevel: 'loose',
+        });
+        
+        setTimeout(() => {
+            const svg = document.querySelector('.mermaid svg');
+            if (svg) {
+                svg.setAttribute('style', 'max-width: 100%; height: auto;');
+            }
+        }, 500);
+        
+        const captureElement = document.getElementById('flowchartCaptureArea');
+        
+        document.getElementById('exportPNGbtn').addEventListener('click', function() {
+            html2canvas(captureElement, {
+                scale: 2.5,
+                backgroundColor: '#ffffff',
+                logging: false
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'SFDA_MDMA_Bundling_Flowchart.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }).catch(err => {
+                alert('Could not generate PNG. Please try again.');
+            });
+        });
+        
+        document.getElementById('exportPDFbtn').addEventListener('click', function() {
+            const cloneCard = captureElement.cloneNode(true);
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write('<!DOCTYPE html><html><head><title>SFDA MDMA Bundling Flowchart</title>');
+            printWindow.document.write('<style>');
+            printWindow.document.write('body { margin: 0; padding: 20px; font-family: "Segoe UI", Arial, sans-serif; background: white; }');
+            printWindow.document.write('.export-toolbar { display: none; }');
+            printWindow.document.write('.btn-export { display: none; }');
+            printWindow.document.write('.mermaid svg { max-width: 100%; height: auto; }');
+            printWindow.document.write('.card { max-width: 100%; margin: 0; box-shadow: none; }');
+            printWindow.document.write('.hero { background: #0b5e5e; }');
+            printWindow.document.write('.mermaid-wrapper { overflow: visible; }');
+            printWindow.document.write('</style>');
+            printWindow.document.write('</head><body>');
+            printWindow.document.write(cloneCard.outerHTML);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.addEventListener('load', function() {
+                printWindow.print();
+            });
+        });
+    })();
 </script>
 </body>
 </html>
