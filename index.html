@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SFDA MDMA Bundling Flowchart - Lindkein</title>
+    <title>SFDA MDMA New Bundling Flowchart</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         * {
@@ -28,7 +28,6 @@
             overflow: hidden;
         }
 
-        /* Header Section */
         .header {
             background: linear-gradient(135deg, #0b5e5e 0%, #063838 100%);
             color: white;
@@ -57,7 +56,6 @@
             border-radius: 2px;
         }
 
-        /* Flowchart Area */
         .flowchart-area {
             padding: 32px 24px;
             background: #fafbfb;
@@ -72,10 +70,9 @@
             padding: 20px;
             border-radius: 16px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            min-width: 800px;
+            min-width: 900px;
         }
 
-        /* Footer Section */
         .footer {
             background: #f0f4f3;
             padding: 24px 40px;
@@ -92,6 +89,18 @@
             padding-bottom: 12px;
             border-bottom: 1px dashed #c0cecc;
             display: inline-block;
+        }
+
+        .reference a {
+            color: #0b5e5e;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s ease;
+        }
+
+        .reference a:hover {
+            color: #f9a825;
+            text-decoration: underline;
         }
 
         .signature {
@@ -130,7 +139,7 @@
 <div class="container">
     <div class="header">
         <h1>🔬 SFDA MDMA Bundling Decision Flowchart</h1>
-        <div class="subtitle">IVD & Medical Devices</div>
+        <div class="subtitle">IVD & Other Medical Devices</div>
         <div class="divider"></div>
     </div>
 
@@ -147,6 +156,7 @@
     'tertiaryColor': '#e8f5e9',
     'clusterBkg': '#f0f4f3',
     'clusterBorder': '#c0cecc',
+    'edgeLabelBackground':'#ffffff',
     'fontSize': '14px',
     'fontFamily': 'Segoe UI, Roboto, Arial, sans-serif'
   },
@@ -160,52 +170,66 @@
 }}%%
 
 flowchart TD
-    START[Start: List all devices for MDMA application]
+    START["🔬 START: List all devices for MDMA application"]
     
-    START --> Q1{Are the devices<br>IVDs or Non-IVDs?}
+    START --> MAIN_DECISION{"What type of device?"}
     
-    Q1 -->|Non-IVD Medical Devices| Q2{Do they have the<br>same legal manufacturer?}
-    Q1 -->|IVD Medical Devices| IVD_START
+    MAIN_DECISION -->|"← Others Medical Devices →"| Others_MD_START
+    MAIN_DECISION -->|"← IVD Medical Devices →"| IVD_START
+    
+    %% ==================== MEDICAL DEVICES PATHWAY ====================
+    subgraph Others_MD_START [Other MEDICAL DEVICES]
+        direction TB
+        Q2{Do they have the<br>same legal manufacturer?}
+    end
     
     Q2 -->|No| SEPARATE[Submit separate applications<br>Cannot bundle]
     Q2 -->|Yes| Q3{Do they form a<br>Procedure Pack?}
     
-    Q3 -->|Yes| PACK[Procedure Pack Criteria<br>✔ Same intended use & specialty<br>✔ Same risk class of pack<br>✔ Max 5 TFs, Max 50 items<br>✔ Letter of agreement from each component mfr<br>✔ Submit TF for pack + each component]
+    Q3 -->|Yes| PACK["📦 Procedure Pack Criteria<br>✔ Same intended use & specialty<br>✔ Same risk class of pack<br>✔ Max 5 TFs, Max 50 items<br>✔ Letter of agreement<br>✔ Submit TF for pack + each component"]
     
     Q3 -->|No| Q4{Do they form a<br>System?<br>Used together for common purpose}
     
-    Q4 -->|Yes| SYSTEM[System Criteria<br>✔ Same legal manufacturer<br>✔ Used in combination<br>✔ 1 system per application only<br>✔ Max 5 TFs, Max 50 items<br>✔ Highest risk class applies]
+    Q4 -->|Yes| SYSTEM["🖥️ System Criteria<br>✔ Same legal manufacturer<br>✔ Used in combination<br>✔ 1 system per application only<br>✔ Max 5 TFs, Max 50 items<br>✔ Highest risk class applies"]
     
     Q4 -->|No| Q5{Are they<br>Surgical Instruments?}
     
-    Q5 -->|Yes| SURGICAL[Surgical Instruments Family<br>✔ Same manufacturer, risk class, material, process<br>✔ Same FUNCTION cut/retract/grasp/dilate/cannulate/aspirate/suture<br>✔ NOT required: same intended use<br>✔ Max 5 TFs, Max 50 items]
+    Q5 -->|Yes| SURGICAL["🔪 Surgical Instruments Family<br>✔ Same manufacturer, risk class<br>✔ Same FUNCTION (cut, grasp, retract...)<br>✔ NOT required: same intended use<br>✔ Max 5 TFs, Max 50 items"]
     
     Q5 -->|No| Q6{Are they<br>Dental Instruments?}
     
-    Q6 -->|Yes| DENTAL[Dental Instruments Family<br>✔ Same manufacturer, intended use, risk class<br>✔ Same SPECIALTY see 12 specialties<br>✔ Max 5 TFs, Max 50 items]
+    Q6 -->|Yes| DENTAL["🦷 Dental Instruments Family<br>✔ Same manufacturer, intended use<br>✔ Same SPECIALTY (12 specialties)<br>✔ Max 5 TFs, Max 50 items"]
     
-    Q6 -->|No| Q7{Medical Device Family<br>Same intended use, risk class,<br>GMDN code, design, material, process?}
+    Q6 -->|No| Q7{Same intended use, risk class,<br>GMDN code, design, material, process?}
     
-    Q7 -->|Yes| FAMILY[Medical Device Family<br>✔ Max 5 TFs, Max 50 items<br>✔ Examples: catheters different lengths,<br>guide wires different tips, IOLs different diopters]
+    Q7 -->|Yes| FAMILY["🏷️ Medical Device Family<br>✔ Max 5 TFs, Max 50 items<br>✔ Examples: catheters, guide wires, IOLs"]
     
     Q7 -->|No| SEPARATE
-
-    subgraph IVD_START [IVD Medical Devices]
+    
+    %% ==================== IVD PATHWAY ====================
+    subgraph IVD_START [IVD MEDICAL DEVICES]
         direction TB
-        IVD_Q1{Are they Class A<br>specimen containers, dyes, stains,<br>culture media, reagents,<br>tissue processing, or cell culture supplies?}
-        IVD_Q1 -->|Yes| IVD_EXEMPT[✅ Exempt bundled in one application<br>✔ Different intended uses allowed<br>✔ Not subject to same TF rule<br>✔ Max 50 items total<br>❌ Excludes blood collection devices, lab machinery, powered systems]
-        IVD_Q1 -->|No| IVD_Q2{Same legal manufacturer?}
-        IVD_Q2 -->|No| SEPARATE
-        IVD_Q2 -->|Yes| IVD_Q3{Same risk class?}
-        IVD_Q3 -->|No| SEPARATE
-        IVD_Q3 -->|Yes| IVD_Q4{Same intended use/purpose<br>AND same principle of operation?<br>e.g., all PCR, all chromatography, all agglutination}
-        IVD_Q4 -->|No| SEPARATE
-        IVD_Q4 -->|Yes| IVD_Q5{Fall into ONE of 7 groupings?<br>1. Blood grouping<br>2. Tissue typing<br>3. Cancer markers<br>4. Genetic testing<br>5. Infections/immune status<br>6. Non-infectious pathologies<br>7. Controls without assigned value}
-        IVD_Q5 -->|No| SEPARATE
-        IVD_Q5 -->|Yes| IVD_BUNDLE[IVD Bundle<br>✔ Same clinical/performance evaluation data = 1 TF<br>✔ Max 5 TFs per application<br>✔ Max 50 items per application]
+        IVD_Q1{Are they Class A exempt?<br>specimen containers, dyes, stains,<br>culture media, reagents,<br>tissue processing, cell culture supplies?}
     end
-
-    PACK --> CHECK_MAX{Check limits}
+    
+    IVD_Q1 -->|Yes| IVD_EXEMPT["🟢 Class A Exempt Bundle<br>✔ Different intended uses allowed<br>✔ Not subject to same TF rule<br>✔ Max 50 items total<br>❌ Excludes blood collection devices, lab machinery, powered systems"]
+    
+    IVD_Q1 -->|No| IVD_Q2{Same legal manufacturer?}
+    
+    IVD_Q2 -->|No| SEPARATE
+    IVD_Q2 -->|Yes| IVD_Q3{Same risk class?}
+    
+    IVD_Q3 -->|No| SEPARATE
+    IVD_Q3 -->|Yes| IVD_Q4{Same intended use/purpose<br>AND same principle of operation?<br>e.g., all PCR, all chromatography}
+    
+    IVD_Q4 -->|No| SEPARATE
+    IVD_Q4 -->|Yes| IVD_Q5{Fall into ONE of 7 groupings?<br>1.Blood 2.Tissue 3.Cancer<br>4.Genetic 5.Infections<br>6.Non-infectious 7.Controls}
+    
+    IVD_Q5 -->|No| SEPARATE
+    IVD_Q5 -->|Yes| IVD_BUNDLE["🔬 Standard IVD Bundle<br>✔ Same clinical/performance data = 1 TF<br>✔ Max 5 TFs per application<br>✔ Max 50 items per application"]
+    
+    %% ==================== LIMITS CHECK ====================
+    PACK --> CHECK_MAX
     SYSTEM --> CHECK_MAX
     SURGICAL --> CHECK_MAX
     DENTAL --> CHECK_MAX
@@ -213,24 +237,35 @@ flowchart TD
     IVD_EXEMPT --> CHECK_MAX
     IVD_BUNDLE --> CHECK_MAX
     
-    CHECK_MAX{Total items ≤ 50?<br>Total TFs ≤ 5?<br>System: only 1 system?}
-    CHECK_MAX -->|Yes| SUBMIT[✅ Proceed with single MDMA application]
-    CHECK_MAX -->|No| SPLIT[❌ Split into multiple applications]
+    CHECK_MAX{Check limits:<br>Total items ≤ 50?<br>Total TFs ≤ 5?<br>System: only 1 system?}
     
-    SEPARATE --> END1[Submit separate applications]
-    SUBMIT --> END2[Submit bundled application]
-    SPLIT --> END3[Re-evaluate bundling strategy]
+    CHECK_MAX -->|Yes| SUBMIT["✅ SUCCESS: Proceed with single MDMA application"]
+    CHECK_MAX -->|No| SPLIT["⚠️ WARNING: Split into multiple applications"]
+    
+    SEPARATE --> END1["❌ Submit separate applications"]
+    SUBMIT --> END2["✅ Submit bundled application"]
+    SPLIT --> END3["⚠️ Re-evaluate bundling strategy"]
 
-    %% Styling for Yes/No branches and nodes
+    %% ==================== STYLING ====================
     style START fill:#0b5e5e,stroke:#063838,stroke-width:2px,color:#fff
-    style Q1 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
-    style Q2 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
-    style Q3 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
-    style Q4 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
-    style Q5 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
-    style Q6 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
-    style Q7 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
-    style CHECK_MAX fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style MAIN_DECISION fill:#f9a825,stroke:#d48a00,stroke-width:3px,color:#000
+    
+    style NON_IVD_START fill:#e8f5e9,stroke:#4caf50,stroke-width:2px,color:#000
+    style IVD_START fill:#e3f2fd,stroke:#2196f3,stroke-width:2px,color:#000
+    
+    style Q2 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    style Q3 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    style Q4 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    style Q5 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    style Q6 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    style Q7 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    style CHECK_MAX fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    
+    style IVD_Q1 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    style IVD_Q2 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    style IVD_Q3 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    style IVD_Q4 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
+    style IVD_Q5 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#000
     
     style PACK fill:#2196f3,stroke:#0b5e5e,stroke-width:2px,color:#fff
     style SYSTEM fill:#9c27b0,stroke:#6a1b9a,stroke-width:2px,color:#fff
@@ -238,33 +273,32 @@ flowchart TD
     style DENTAL fill:#ff9800,stroke:#e65100,stroke-width:2px,color:#fff
     style FAMILY fill:#4caf50,stroke:#2e7d32,stroke-width:2px,color:#fff
     style SEPARATE fill:#f44336,stroke:#c62828,stroke-width:2px,color:#fff
-    style SUBMIT fill:#4caf50,stroke:#2e7d32,stroke-width:2px,color:#fff
-    style SPLIT fill:#ff9800,stroke:#e65100,stroke-width:2px,color:#fff
-    
-    style IVD_Q1 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
-    style IVD_Q2 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
-    style IVD_Q3 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
-    style IVD_Q4 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
-    style IVD_Q5 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
     
     style IVD_EXEMPT fill:#4caf50,stroke:#2e7d32,stroke-width:2px,color:#fff
     style IVD_BUNDLE fill:#2196f3,stroke:#0b5e5e,stroke-width:2px,color:#fff
     
+    style SUBMIT fill:#4caf50,stroke:#2e7d32,stroke-width:3px,color:#fff
+    style SPLIT fill:#ff9800,stroke:#e65100,stroke-width:2px,color:#fff
+    
     style END1 fill:#f44336,stroke:#c62828,stroke-width:2px,color:#fff
     style END2 fill:#4caf50,stroke:#2e7d32,stroke-width:2px,color:#fff
     style END3 fill:#ff9800,stroke:#e65100,stroke-width:2px,color:#fff
-
-    %% Custom edge colors for Yes/No
-    linkStyle default stroke:#1a5a5a,stroke-width:2px
+    
+    linkStyle default stroke:#1a5a5a,stroke-width:2.5px
         </pre>
     </div>
 
     <div class="footer">
-        <div class="reference">📌 Reference: SFDA MDS-G-028-V1 (2026)</div>
+        <div class="reference">
+            📌 Reference: 
+            <a href="https://www.sfda.gov.sa/sites/default/files/2026-05/MDS-G28.pdf" target="_blank" rel="noopener noreferrer">
+                SFDA MDS-G-028-V1 (2026)
+            </a>
+        </div>
         <hr>
         <div class="signature">
-            <span class="linkedin-icon">🔗</span> Jamaluddin | MSc Market Access | Business Development | 
-            <a href="https://www.linkedin.com/in/jamaluddin-bd-qa" target="_blank">www.linkedin.com/in/jamaluddin-bd-qa</a>
+            <span class="linkedin-icon">🔗</span> Jamaluddin | MSc | Market Access | Business Development | 
+            <a href="https://www.linkedin.com/in/jamaluddin-bd-qa" target="_blank" rel="noopener noreferrer">www.linkedin.com/in/jamaluddin-bd-qa</a>
         </div>
     </div>
 </div>
@@ -282,6 +316,8 @@ flowchart TD
             'tertiaryColor': '#e8f5e9',
             'clusterBkg': '#f0f4f3',
             'clusterBorder': '#c0cecc',
+            'edgeLabelBackground': '#ffffff',
+            'labelBackground': '#ffffff',
             'fontSize': '14px',
             'fontFamily': 'Segoe UI, Roboto, Arial, sans-serif'
         },
