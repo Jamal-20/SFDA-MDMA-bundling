@@ -3,204 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SFDA MDMA Bundling Decision Flowchart</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <title>SFDA MDMA Bundling Flowchart - Lindkein</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
-            padding: 40px 20px;
+            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e0ecea 0%, #cbdcd9 100%);
             min-height: 100vh;
+            padding: 40px 20px;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             overflow: hidden;
         }
-        
+
         /* Header Section */
         .header {
-            background: linear-gradient(135deg, #1a472a 0%, #0d2818 100%);
+            background: linear-gradient(135deg, #0b5e5e 0%, #063838 100%);
             color: white;
-            padding: 30px 40px;
-            border-bottom: 4px solid #ffd700;
+            padding: 32px 40px;
+            text-align: center;
         }
-        
+
         .header h1 {
             font-size: 28px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
         }
-        
-        .header h1 span {
-            font-size: 32px;
-        }
-        
-        .header p {
-            font-size: 16px;
+
+        .header .subtitle {
+            font-size: 18px;
             opacity: 0.9;
-            margin-top: 8px;
+            font-weight: 400;
         }
-        
-        .badge {
-            display: inline-block;
-            background: rgba(255,215,0,0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin-top: 10px;
+
+        .header .divider {
+            width: 80px;
+            height: 3px;
+            background: #f9a825;
+            margin: 16px auto 0 auto;
+            border-radius: 2px;
         }
-        
-        /* Flowchart Container */
-        .flowchart-container {
-            padding: 40px;
-            background: white;
+
+        /* Flowchart Area */
+        .flowchart-area {
+            padding: 32px 24px;
+            background: #fafbfb;
+            border-bottom: 1px solid #e0e8e6;
             overflow-x: auto;
         }
-        
+
         .mermaid {
             display: flex;
             justify-content: center;
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             min-width: 800px;
         }
-        
+
         /* Footer Section */
         .footer {
-            background: #f8f9fa;
-            padding: 20px 40px;
-            border-top: 1px solid #dee2e6;
-            border-bottom: 3px solid #1a472a;
+            background: #f0f4f3;
+            padding: 24px 40px;
+            text-align: center;
+            border-top: 1px solid #d0dad8;
         }
-        
-        .separator {
-            border-top: 1px dashed #adb5bd;
-            margin: 12px 0;
-        }
-        
+
         .reference {
-            color: #495057;
-            font-family: monospace;
             font-size: 13px;
-            margin: 8px 0;
+            color: #1a5a5a;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #c0cecc;
+            display: inline-block;
         }
-        
+
         .signature {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid #dee2e6;
-        }
-        
-        .author {
             font-size: 14px;
-            color: #1a472a;
+            color: #2c4a4a;
             font-weight: 500;
+            margin-top: 8px;
         }
-        
-        .linkedin {
-            color: #0077b5;
+
+        .signature a {
+            color: #0b5e5e;
             text-decoration: none;
-            font-size: 13px;
+            border-bottom: 1px solid #0b5e5e;
         }
-        
-        .linkedin:hover {
-            text-decoration: underline;
+
+        .signature a:hover {
+            color: #f9a825;
+            border-bottom-color: #f9a825;
         }
-        
-        .share-buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 8px 16px;
-            border-radius: 8px;
+
+        hr {
             border: none;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            border-top: 2px solid #c0cecc;
+            margin: 8px 0 16px 0;
         }
-        
-        .btn-primary {
-            background: #1a472a;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #0d2818;
-            transform: translateY(-2px);
-        }
-        
-        .btn-secondary {
-            background: #e9ecef;
-            color: #495057;
-        }
-        
-        .btn-secondary:hover {
-            background: #dee2e6;
-        }
-        
-        .btn-copy {
-            background: #0d6efd;
-            color: white;
-        }
-        
-        .btn-copy:hover {
-            background: #0b5ed7;
-        }
-        
-        .alert {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 12px 20px;
-            margin: 20px 40px;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #856404;
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 22px; }
+            .header .subtitle { font-size: 14px; }
+            .footer { padding: 20px; }
+            .signature { font-size: 11px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- HEADER -->
-        <div class="header">
-            <h1>
-                <span>🔬</span> 
-                SFDA MDMA Bundling Decision Flowchart
-                <span>📋</span>
-            </h1>
-            <p>IVD & Medical Devices | Regulatory Decision Framework</p>
-            <div class="badge">🇸🇦 Saudi Food & Drug Authority - Medical Device Market Authorization</div>
-        </div>
-        
-        <!-- FLOWCHART -->
-        <div class="flowchart-container">
-            <pre class="mermaid">
+<div class="container">
+    <div class="header">
+        <h1>🔬 SFDA MDMA Bundling Decision Flowchart</h1>
+        <div class="subtitle">IVD & Medical Devices</div>
+        <div class="divider"></div>
+    </div>
+
+    <div class="flowchart-area">
+        <pre class="mermaid">
+%%{init: {
+  'theme': 'base',
+  'themeVariables': {
+    'primaryColor': '#0b5e5e',
+    'primaryTextColor': '#ffffff',
+    'primaryBorderColor': '#063838',
+    'lineColor': '#1a5a5a',
+    'secondaryColor': '#f9a825',
+    'tertiaryColor': '#e8f5e9',
+    'clusterBkg': '#f0f4f3',
+    'clusterBorder': '#c0cecc',
+    'fontSize': '14px',
+    'fontFamily': 'Segoe UI, Roboto, Arial, sans-serif'
+  },
+  'flowchart': {
+    'curve': 'basis',
+    'padding': 20,
+    'nodeSpacing': 50,
+    'rankSpacing': 50,
+    'htmlLabels': true
+  }
+}}%%
+
 flowchart TD
-    START[Start: List all devices for MDMA application] --> Q1{Are the devices<br>IVDs or Non-IVDs?}
+    START[Start: List all devices for MDMA application]
+    
+    START --> Q1{Are the devices<br>IVDs or Non-IVDs?}
     
     Q1 -->|Non-IVD Medical Devices| Q2{Do they have the<br>same legal manufacturer?}
     Q1 -->|IVD Medical Devices| IVD_START
@@ -243,7 +205,7 @@ flowchart TD
         IVD_Q5 -->|Yes| IVD_BUNDLE[IVD Bundle<br>✔ Same clinical/performance evaluation data = 1 TF<br>✔ Max 5 TFs per application<br>✔ Max 50 items per application]
     end
 
-    PACK --> CHECK_MAX{Total items ≤ 50?<br>Total TFs ≤ 5?<br>System: only 1 system?}
+    PACK --> CHECK_MAX{Check limits}
     SYSTEM --> CHECK_MAX
     SURGICAL --> CHECK_MAX
     DENTAL --> CHECK_MAX
@@ -251,76 +213,85 @@ flowchart TD
     IVD_EXEMPT --> CHECK_MAX
     IVD_BUNDLE --> CHECK_MAX
     
+    CHECK_MAX{Total items ≤ 50?<br>Total TFs ≤ 5?<br>System: only 1 system?}
     CHECK_MAX -->|Yes| SUBMIT[✅ Proceed with single MDMA application]
     CHECK_MAX -->|No| SPLIT[❌ Split into multiple applications]
     
     SEPARATE --> END1[Submit separate applications]
     SUBMIT --> END2[Submit bundled application]
     SPLIT --> END3[Re-evaluate bundling strategy]
-            </pre>
-        </div>
-        
-        <!-- FOOTER -->
-        <div class="footer">
-            <div class="separator"></div>
-            <div class="reference">📌 Reference: SFDA MDS-G-028-V1 (2026)</div>
-            <div class="signature">
-                <div class="author">
-                    ✍️ Jamaluddin | MSc Market Access | Business Development
-                </div>
-                <a href="https://www.linkedin.com/in/jamaluddin-bd-qa" target="_blank" class="linkedin">
-                    🔗 www.linkedin.com/in/jamaluddin-bd-qa
-                </a>
-            </div>
-        </div>
-        
-        <!-- SHARE SECTION -->
-        <div class="alert">
-            💡 <strong>Pro Tip:</strong> This flowchart is interactive in HTML format. Share via any method below.
-        </div>
-        <div style="padding: 0 40px 40px 40px;">
-            <div class="share-buttons">
-                <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
-                <button class="btn btn-copy" onclick="copyShareableLink()">📋 Copy Shareable Link</button>
-                <a href="https://www.linkedin.com/sharing/share-offsite/?url=" class="btn btn-secondary" target="_blank" id="linkedinShare">💼 Share on LinkedIn</a>
-                <a href="https://twitter.com/intent/tweet?text=SFDA%20MDMA%20Bundling%20Decision%20Flowchart%20-%20IVD%20%26%20Medical%20Devices" class="btn btn-secondary" target="_blank">🐦 Share on X</a>
-            </div>
+
+    %% Styling for Yes/No branches and nodes
+    style START fill:#0b5e5e,stroke:#063838,stroke-width:2px,color:#fff
+    style Q1 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style Q2 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style Q3 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style Q4 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style Q5 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style Q6 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style Q7 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style CHECK_MAX fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    
+    style PACK fill:#2196f3,stroke:#0b5e5e,stroke-width:2px,color:#fff
+    style SYSTEM fill:#9c27b0,stroke:#6a1b9a,stroke-width:2px,color:#fff
+    style SURGICAL fill:#ff9800,stroke:#e65100,stroke-width:2px,color:#fff
+    style DENTAL fill:#ff9800,stroke:#e65100,stroke-width:2px,color:#fff
+    style FAMILY fill:#4caf50,stroke:#2e7d32,stroke-width:2px,color:#fff
+    style SEPARATE fill:#f44336,stroke:#c62828,stroke-width:2px,color:#fff
+    style SUBMIT fill:#4caf50,stroke:#2e7d32,stroke-width:2px,color:#fff
+    style SPLIT fill:#ff9800,stroke:#e65100,stroke-width:2px,color:#fff
+    
+    style IVD_Q1 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style IVD_Q2 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style IVD_Q3 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style IVD_Q4 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    style IVD_Q5 fill:#f9a825,stroke:#d48a00,stroke-width:2px,color:#2c2c2c
+    
+    style IVD_EXEMPT fill:#4caf50,stroke:#2e7d32,stroke-width:2px,color:#fff
+    style IVD_BUNDLE fill:#2196f3,stroke:#0b5e5e,stroke-width:2px,color:#fff
+    
+    style END1 fill:#f44336,stroke:#c62828,stroke-width:2px,color:#fff
+    style END2 fill:#4caf50,stroke:#2e7d32,stroke-width:2px,color:#fff
+    style END3 fill:#ff9800,stroke:#e65100,stroke-width:2px,color:#fff
+
+    %% Custom edge colors for Yes/No
+    linkStyle default stroke:#1a5a5a,stroke-width:2px
+        </pre>
+    </div>
+
+    <div class="footer">
+        <div class="reference">📌 Reference: SFDA MDS-G-028-V1 (2026)</div>
+        <hr>
+        <div class="signature">
+            <span class="linkedin-icon">🔗</span> Jamaluddin | MSc Market Access | Business Development | 
+            <a href="https://www.linkedin.com/in/jamaluddin-bd-qa" target="_blank">www.linkedin.com/in/jamaluddin-bd-qa</a>
         </div>
     </div>
-    
-    <script>
-        mermaid.initialize({ 
-            startOnLoad: true,
-            theme: 'base',
-            themeVariables: {
-                'primaryColor': '#1a472a',
-                'primaryBorderColor': '#0d2818',
-                'primaryTextColor': '#fff',
-                'lineColor': '#2c3e50',
-                'secondaryColor': '#e8f5e9',
-                'tertiaryColor': '#fff3e0'
-            },
-            flowchart: {
-                useMaxWidth: true,
-                htmlLabels: true,
-                curve: 'basis',
-                padding: 20
-            }
-        });
-        
-        function copyShareableLink() {
-            // Get current page URL
-            const url = window.location.href;
-            navigator.clipboard.writeText(url).then(() => {
-                alert('✅ Link copied to clipboard!\n\nShare this URL with anyone.');
-            }).catch(() => {
-                alert('⚠️ Press Ctrl+C to copy this URL: ' + url);
-            });
+</div>
+
+<script>
+    mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            'primaryColor': '#0b5e5e',
+            'primaryTextColor': '#ffffff',
+            'primaryBorderColor': '#063838',
+            'lineColor': '#1a5a5a',
+            'secondaryColor': '#f9a825',
+            'tertiaryColor': '#e8f5e9',
+            'clusterBkg': '#f0f4f3',
+            'clusterBorder': '#c0cecc',
+            'fontSize': '14px',
+            'fontFamily': 'Segoe UI, Roboto, Arial, sans-serif'
+        },
+        flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: 'basis',
+            padding: 20
         }
-        
-        // Update LinkedIn share with current URL
-        document.getElementById('linkedinShare').href = 
-            'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(window.location.href);
-    </script>
+    });
+</script>
 </body>
 </html>
