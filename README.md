@@ -6,7 +6,7 @@ Interactive flowchart based on SFDA Guidance **MDS-G-028-V1 (2026)**.
 
 ----
 ## IVD Perspective
-![IVD Paths].(IVD_SFDA_Bundling.png)
+![IVD_SFDA_Bundling].(IVD_SFDA_Bundling.png)
 ---
 
 ### Reference
